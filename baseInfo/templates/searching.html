@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>Searching data</title>
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container mt-5">
+        <div class="row">
+            {% for short in shorts %}
+            <div class="col">
+                <div class="card" style="width: 18rem; margin-bottom: 15px;">
+                    <img src="{{ short.emblem.url }}" class="card-img-top" alt="{{ short.ofiName }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ short.ofiName }}</h5>
+                        <p class="card-text">{{ short.shortI }}</p>
+                        <a href="{% url 'metro' %}" class="btn btn-primary">More</a> <!--!!!!!-->
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

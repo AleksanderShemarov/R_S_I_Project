@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    {% block title %}
+    {% endblock %}
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Arima&display=swap" rel="stylesheet">
+</head>
+<!--{% load static %}-->
+<body><!--I want to make background image with half-shadow:
+style="background: url(static/metrotire.jpg) no-repeat fixed 50% 50%; background-size: 100% 100%;"-->
+    <nav class="navbar" style="background-color: #e3f2fd; position: sticky; top: 0; z-index: 999;">
+        <div class="container-fluid">
+            <div class="navbar-brand" style="display: block;">
+                <div style="display: inline-block;">
+                    <img src="" alt="" width="30" height="24" class="d-inline-block align-text-top">
+                </div>
+                <div style="display: inline-block;">
+                    Railways Society Integrator
+                </div>
+            </div>
+            <form class="d-flex" role="search" action="{% url 'finding' %}" method="GET">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="rqt">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <ul class="nav justify-content-end">
+                {% if request.resolver_match.url_name == "Greet" %}
+                <!--'if "Greet" in url_name' doesn't work;-->
+                <!--'if request.resolver_match.view_name == "Greet"' also works!-->
+                    <li class="nav-item">
+                        <a class="nav-link disabled">Home</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'Greet' %}">Home</a>
+                    </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Team</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Also_In_Production</a>
+                </li>
+                <!--<li class="nav-item">
+                    <a class="nav-link disabled">Disabled</a>
+                </li>-->
+            </ul>
+        </div>
+    </nav>
+
+{% block content %}
+{% endblock %}
+
+    <div class="container" style="margin-bottom: 0;">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="col-md-4 d-flex align-items-center">
+                <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+                    <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
+                </a>
+                <span class="text-muted">&copy; 2022 Railways Society Integrator, SoNetInt.</span>
+            </div>
+            <div class="col-md-4 d-flex align-items-center">
+                <a href="/admin">Enter for Admins</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
