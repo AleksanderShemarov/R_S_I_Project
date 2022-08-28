@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-krvm9831*6c78@9n&t#u4_iucfq9+r+x_ygkaqb5rhd#n10klx
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -82,17 +82,25 @@ DATABASES = {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
     # }
+    # 'default': {
+    #     "ENGINE": "mssql",
+    #     "NAME": "R_S_I_DB",# Microsoft SQL Server
+    #     "USER": "ProjectDB",
+    #     "PASSWORD": "Mallard2012",
+    #     "HOST": "DESKTOP-UDQ8U7P",
+    #     "PORT": "",
+    #
+    #     "OPTIONS": {
+    #         "driver": "ODBC Driver 17 for SQL Server",
+    #     },
+    # }
     'default': {
-        "ENGINE": "mssql",
-        "NAME": "R_S_I_DB",# Microsoft SQL Server
-        "USER": "ProjectDB",
-        "PASSWORD": "Mallard2012",
-        "HOST": "DESKTOP-UDQ8U7P",
-        "PORT": "",
-
-        "OPTIONS": {
-            "driver": "ODBC Driver 17 for SQL Server",
-        },
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'r_s_i_database',
+        'USER': 'tomash_alexander',
+        'PASSWORD': 'Mallard2012',
+        'HOST': 'localhost',
+        'PORT': '5555',
     }
 }
 
