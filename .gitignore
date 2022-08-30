@@ -1,0 +1,4 @@
+file_for_ignoring.txt
+.idea/
+venv/
+__pycache__
