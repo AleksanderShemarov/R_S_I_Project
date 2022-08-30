@@ -5,8 +5,32 @@
 {% endblock %}
 
 {% block content %}
-<div class="container" style="border: 1px solid orange;">
-    <p>Here will be the photo set: an enblem is in a round place; upper it - the beautiful panorama's photo</p>
+{% load static %}
+{% for i in INFO %}
+<div class="" style="border: 1px solid orange;">
+    <div style="margin-left: 0;">
+        <img src="{% static 'metro_scheme.png' %}" alt="PragueScheme"
+             width="100%" style="background: no-repeat;">
+    </div>
+    <div style="display: block;">
+        <div style="margin-left: 0; padding: 0 0 0 0; margin: 0 0 0 0; display: flex;">
+            <img src="{% static 'Trasa_B.jpg' %}" alt="Trasa B" width="350px" height="200px" style="background: no-repeat;">
+        </div>
+        <div style="margin-left: 0; padding: 0 0 0 0; margin: 0 0 0 0; display: flex;">
+            <img src="{% static 'nusle_bridge.jpg' %}" alt="Nuselský most" width="350px" height="200px" style="background: no-repeat;">
+        </div>
+        <div style="margin-left: 0; padding: 0 0 0 0; margin: 0 0 0 0; display: flex;">
+            <img src="{% static 'variarity_metro.jpg' %}" alt="metrotrains" width="350px" height="200px" style="background: no-repeat;">
+        </div>
+        <div style="margin-left: 0; padding: 0 0 0 0; margin: 0 0 0 0; display: flex;">
+            <img src="{% static 'znáčka_stanici.jpg' %}" alt="Jířiho z Podebrad" width="350px" height="200px" style="background: no-repeat;">
+        </div>
+    </div>
+    <div style="margin-left: 0;">
+        <img src="{{ i.emblem.url }}" alt="Emblem" width="100%" style="background: no-repeat;">
+    </div>
+    <!--<div><img src="{ INFO.objects.filter(fieldname='emblem').values('emblem').url }" alt="Emblem"></div>--!!!-->
+    <!--Here will be the photo set: an emblem is in a round place; upper it - the beautiful panorama's photo-->
 </div>
 <div class="container">
     <div>
@@ -29,4 +53,5 @@
         <p>Here will be the main content with photos and videos</p>
     </div>
 </div>
+{% endfor %}
 {% endblock %}
