@@ -44,7 +44,7 @@ class SearchList(ListView):
 
 def metro_view(request):
     # Table from models.py is going here!
-    # infos = MetroShortInfo.objects.filter(ofiName="Prague Metro")
+    infos = MetroShortInfo.objects.filter(ofiName="Prague Metro")
     return render(request, "metro.html", context={
-        'INFO' : ...,
+        'INFO' : infos,
     })
