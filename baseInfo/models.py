@@ -33,7 +33,9 @@ class MetroShortInfo(models.Model):
     openDate = models.DateField()
     workTime = models.TextField(max_length=120)
     emblem = models.ImageField(upload_to='logomeaning/', null=True, blank=True)
-    info = models.TextField(max_length=1200)
+    commonInfo = models.TextField(max_length=1200)
+    history = models.TextField(max_length=1200, default="")
+    hacks_facts = models.TextField(max_length=1200, default="")
     shortI = models.TextField(max_length=125)
 
     def __str__(self):

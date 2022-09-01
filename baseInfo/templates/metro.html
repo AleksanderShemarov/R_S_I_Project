@@ -33,24 +33,76 @@
     <!--Here will be the photo set: an emblem is in a round place; upper it - the beautiful panorama's photo-->
 </div>
 <div class="container" style="margin-top: 50px;">
-    <div style="margin-top: 10px; margin-bottom: 9px;">
+    <div style="margin-top: 10px; margin-bottom: 9px; border: 1px solid orange;">
+        <form action="{% url 'metro' %}" method="POST">
+                    {% csrf_token %}
         <ul class="nav nav-pills nav-fill">
+            {% if "COMMON" in request.POST %}
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Common Info</a>
+                <input type="submit" value="A Little About History" name="HISTORY">
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">A Little About History</a>
+                <input type="submit" value="Life Hacks & Facts" name="HACK">
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Life Hacks</a>
+                <input type="submit" value="Tickets" name="TICKET">
+            </li>
+            {% elif "HISTORY" in request.POST %}
+            <li class="nav-item">
+                <input type="submit" value="Common Info" name="COMMON">
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled">Tickets</a>
+                <input type="submit" value="Life Hacks & Facts" name="HACK">
             </li>
+            <li class="nav-item">
+                <input type="submit" value="Tickets" name="TICKET">
+            </li>
+            {% elif "HACK" in request.POST %}
+            <li class="nav-item">
+                <input type="submit" value="Common Info" name="COMMON">
+            </li>
+            <li class="nav-item">
+                <input type="submit" value="A Little About History" name="HISTORY">
+            </li>
+            <li class="nav-item">
+                <input type="submit" value="Tickets" name="TICKET">
+            </li>
+            {% elif "TICKET" in request.POST %}
+            <li class="nav-item">
+                <input type="submit" value="Common Info" name="COMMON">
+            </li>
+            <li class="nav-item">
+                <input type="submit" value="A Little About History" name="HISTORY">
+            </li>
+            <li class="nav-item">
+                <input type="submit" value="Life Hacks & Facts" name="HACK">
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <input type="submit" value="A Little About History" name="HISTORY">
+            </li>
+            <li class="nav-item">
+                <input type="submit" value="Life Hacks & Facts" name="HACK">
+            </li>
+            <li class="nav-item">
+                <input type="submit" value="Tickets" name="TICKET">
+            </li>
+            {% endif %}
         </ul>
+        </form>
     </div>
     <div>
-        <p style="text-align: justify;">    Here will be the main content with photos and videos</p>
+        {% if "COMMON" in request.POST %}
+        <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;{{ i.commonInfo }}</p>
+        {% elif "HISTORY" in request.POST %}
+        <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;{{ i.history }}</p>
+        {% elif "HACK" in request.POST %}
+        <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;{{ i.hacks_facts }}</p>
+        {% elif "TICKET" in request.POST %}
+        <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;{{ ... }}</p>
+        {% else %}
+        <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;{{ i.commonInfo }}</p>
+        {% endif %}
     </div>
 </div>
 {% endfor %}

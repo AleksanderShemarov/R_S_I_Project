@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from django.views.generic import ListView, TemplateView
 from .models import Greeting, MetroShortInfo
 from django.db.models import Q
@@ -42,11 +42,23 @@ class SearchList(ListView):
 
 
 def metro_view(request):
-    # Table from models.py is going here!
-    infos = MetroShortInfo.objects.filter(ofiName="Prague Metro")
-    return render(request, "metro.html", context={
-        'INFO' : infos,
-    })
+    if request.method == "GET":
+        # Table from models.py is going here!
+        infos = MetroShortInfo.objects.filter(ofiName="Prague Metro")
+        return render(request, "metro.html", context={
+            'INFO' : infos,
+        })
+    elif request.method == "POST":
+        infos = MetroShortInfo.objects.filter(ofiName="Prague Metro")
+        return render(request, "metro.html", context={
+            'INFO': infos,
+        })
+    return HttpResponse("""
+        <div>
+            <p>It is under construction</p>
+            <a href="/PrahaMetro/">Back</a>
+        </div>
+    """)
 
 
 class TeamTemplate(TemplateView):
