@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView
-# TemplateView
+from django.views.generic import ListView, TemplateView
 from .models import Greeting, MetroShortInfo
 from django.db.models import Q
 # Create your views here.
@@ -48,3 +47,15 @@ def metro_view(request):
     return render(request, "metro.html", context={
         'INFO' : infos,
     })
+
+
+class TeamTemplate(TemplateView):
+
+    template_name = "team_page.html"
+
+
+class Production(TemplateView):
+
+    template_name = "production.html"
+
+
