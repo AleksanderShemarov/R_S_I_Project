@@ -1,6 +1,6 @@
-from django.shortcuts import render, HttpResponse
-from django.views.generic import ListView, TemplateView
-from .models import Greeting, MetroShortInfo
+from django.shortcuts import render, HttpResponse, redirect
+from django.views.generic import ListView, TemplateView, FormView
+from .models import Greeting, MetroShortInfo, UserFormReg, UserEnter
 from django.db.models import Q
 # Create your views here.
 
@@ -70,4 +70,46 @@ class Production(TemplateView):
 
     template_name = "production.html"
 
+
+def reception_view(request):
+    if request.method == "POST":
+        form = UserFormReg(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+        else:
+            form = UserFormReg()
+    else:
+        form = UserFormReg()
+        return render(request, "reception.html", context={
+            "form": form,
+        })
+    return HttpResponse("""
+    <div>
+        <div style="float: center;">
+            <p>It isn't working yet!</p>
+            <form action="/" method="GET">
+                <input type="submit" value="Go Back">
+            </form>
+        </div>
+    </div>
+    """)
+
+
+def enter_view(request):
+    if request.method == "GET":
+        authen = UserEnter()
+        return render(request, "authentication.html", context={
+            "AUTH": authen,
+        })
+    return HttpResponse("""
+    <div>
+        <div style="float: center;">
+            <p>It isn't working yet!</p>
+            <form action="/" method="GET">
+                <input type="submit" value="Go Back">
+            </form>
+        </div>
+    </div>
+    """)
 
