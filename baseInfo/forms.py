@@ -1,6 +1,6 @@
 from django.forms import ModelForm, CharField
 # from django.contrib.auth.models import User
-from .models import User
+from django.contrib.auth.models import User
 
 
 class UserFormReg(ModelForm):
@@ -33,4 +33,3 @@ class UserEnter(ModelForm):
 #
 #         model = User
 #         fields = "__all__"  # ["name", "surname", "surname", "username"]
-
