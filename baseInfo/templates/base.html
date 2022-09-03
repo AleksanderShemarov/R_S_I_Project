@@ -89,6 +89,18 @@ style="background: url(static/metrotire.jpg) no-repeat fixed 50% 50%; background
                     <a class="nav-link disabled">Disabled</a>
                 </li>-->
             </ul>
+            <div style="display: flex;">
+                <div style="margin-right: 10px; margin-left: 3px;">
+                    <form class="d-flex" action="{% url 'RegI' %}" method="GET">
+                        <button class="btn btn-outline-primary" type="submit">Sign in</button>
+                    </form>
+                </div>
+                <div style="margin-left: 3px;">
+                    <form class="d-flex" action="{% url 'AUTH' %}" method="GET">
+                        <button class="btn btn-outline-secondary" type="submit">Sign on</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </nav>
 
