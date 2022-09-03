@@ -1,8 +1,27 @@
-# from django import forms
-from django.contrib.auth.models import User
-# from .models import User
-#
-#
+from django.forms import ModelForm, CharField
+# from django.contrib.auth.models import User
+from .models import User
+
+
+class UserFormReg(ModelForm):
+
+    username = CharField(max_length=255, required=False)
+
+    class Meta:
+        model = User
+        fields = ["first_name", "last_name", "username", "email", "password"]
+        # fields = "__all__"
+
+        def __str__(self):
+            return f"{self.model.first_name} {self.model.last_name}"
+
+
+class UserEnter(ModelForm):
+    class Meta:
+        model = User
+        fields = ["email", "password"]
+
+
 # class Registration(forms.Form):
 #
 #     username = forms.CharField(required=False, label="Your nickname, if you want")

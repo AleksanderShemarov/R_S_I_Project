@@ -1,8 +1,7 @@
 from django.db import models
 # from datetime import datetime
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 # AbstractUser
-from django.forms import ModelForm, CharField
 # Create your models here.
 
 
@@ -61,22 +60,3 @@ class MetroShortInfo(models.Model):
 #
 #         model = User
 #
-
-class UserFormReg(ModelForm):
-
-    username = CharField(max_length=255, required=False)
-
-    class Meta:
-        model = User
-        fields = ["first_name", "last_name", "username", "email", "password"]
-        # fields = "__all__"
-
-        def __str__(self):
-            return f"{self.model.first_name} {self.model.last_name}"
-
-
-class UserEnter(ModelForm):
-    class Meta:
-        model = User
-        fields = ["email", "password"]
-

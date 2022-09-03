@@ -1,7 +1,8 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.views.generic import ListView, TemplateView, FormView
-from .models import Greeting, MetroShortInfo, UserFormReg, UserEnter
+from .models import Greeting, MetroShortInfo
 from django.db.models import Q
+from .forms import UserFormReg, UserEnter
 # Create your views here.
 
 
