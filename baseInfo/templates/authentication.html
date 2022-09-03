@@ -1,0 +1,25 @@
+{% extends "reception_base.html" %}
+
+{% block title %}
+<title>Authentication</title>
+{% endblock %}
+
+{% block content %}
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #30D5C8;">
+<!--    <div style="display: inline-block; border: 1px solid black; height: 100%; vertical-align: middle;">-->
+        <div style="text-align: center; border: 1px black solid; border-radius: 10px/14px; background-color: white;">
+            <h1 style="font-style: italic; background-color: black; color: gold; margin-bottom: 0; padding-bottom: 4px;
+border-radius: 10px 10px 0 0;">Entrance</h1>
+            <form action="/regist/" method="POST" style="border: 1px black solid; padding: 8px 10px 7px; background-color: silver;">
+                {% csrf_token %}
+                {{ AUTH.as_p }}
+<!--                <input type="submit" value="Sign in">-->
+                <button class="btn btn-outline-secondary" type="submit" style="color: white;">Sign in</button>
+            </form>
+            <form class="d-flex" action="{% url 'Greet' %}" style="padding-top: 5px; border: 1px black solid; justify-content: center;
+border-radius: 0 0 10px 10px; background-color: #45161C; padding-bottom: 5px;">
+                <button class="btn btn-outline-danger" type="submit" style="color: white; background-color: #EC2D01;">Back</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
