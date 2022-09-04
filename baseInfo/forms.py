@@ -1,25 +1,42 @@
-from django.forms import ModelForm, CharField
-# from django.contrib.auth.models import User
+from django import forms
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import AuthenticationForm
 
 
-class UserFormReg(ModelForm):
+class UserFormReg(forms.ModelForm):
 
-    username = CharField(max_length=255, required=False)
+    username = forms.CharField(max_length=255, required=False)
+    password_first = forms.CharField(label="Your password", widget=forms.PasswordInput)
+    password_second = forms.CharField(label="Repeat it", widget=forms.PasswordInput)
 
     class Meta:
         model = User
-        fields = ["first_name", "last_name", "username", "email", "password"]
+        fields = ["first_name", "last_name", "username", "email"]
         # fields = "__all__"
 
-        def __str__(self):
-            return f"{self.model.first_name} {self.model.last_name}"
+        def is_common(self):
+            datum = self.cleaned_data
+            if datum['password_first'] != datum['password_second']:
+                raise forms.ValidationError('Passwords aren\'t the same.')
+            return datum['password_second']
 
 
-class UserEnter(ModelForm):
+# class UserEnter(forms.ModelForm):
+#
+#     # email = forms.EmailField(label="Enter email", widget=forms.EmailInput)
+#     # password = forms.CharField(label="Password", widget=forms.PasswordInput)
+#     username = forms.CharField(label="Your nickname", max_length=255)
+#
+#     class Meta:
+#         model = User
+#         fields = ['username']
+
+
+class AuthUserForm(AuthenticationForm, forms.ModelForm):
+
     class Meta:
         model = User
-        fields = ["email", "password"]
+        fields = ["username", "email", "password"]
 
 
 # class Registration(forms.Form):

@@ -10,9 +10,9 @@
         <div style="text-align: center; border: 1px black solid; border-radius: 10px/14px; background-color: white;">
             <h1 style="font-style: italic; background-color: black; color: gold; margin-bottom: 0; padding-bottom: 4px;
 border-radius: 10px 10px 0 0;">Entrance</h1>
-            <form action="/regist/" method="POST" style="border: 1px black solid; padding: 8px 10px 7px; background-color: silver;">
+            <form action="/auth/" method="POST" style="border: 1px black solid; padding: 8px 10px 7px; background-color: silver;">
                 {% csrf_token %}
-                {{ AUTH.as_p }}
+                {{ form.as_p }}
 <!--                <input type="submit" value="Sign in">-->
                 <button class="btn btn-outline-secondary" type="submit" style="color: white;">Sign in</button>
             </form>
