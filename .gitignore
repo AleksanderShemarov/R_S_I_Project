@@ -1,0 +1,6 @@
+.idea/*
+venv/
+main.py
+fundament/__pycache__/*
+baseInfo/__pycache__/*
+baseInfo/migrations/__pycache__/*
