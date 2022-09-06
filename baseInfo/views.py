@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.views.generic import ListView, TemplateView
 # FormView
-from .models import Greeting, MetroShortInfo
+from .models import Greeting, MetroShortInfo, Ticket
 from django.db.models import Q
 from .forms import UserFormReg, AuthUserForm
 from django.contrib.auth import logout
@@ -49,16 +49,18 @@ class SearchList(ListView):
 
 
 def metro_view(request):
+    infos = MetroShortInfo.objects.filter(ofiName="Prague Metro")
+    verifiq = Ticket.objects.all()
     if request.method == "GET":
         # Table from models.py is going here!
-        infos = MetroShortInfo.objects.filter(ofiName="Prague Metro")
         return render(request, "metro.html", context={
             'INFO' : infos,
+            'tickets': verifiq,
         })
     elif request.method == "POST":
-        infos = MetroShortInfo.objects.filter(ofiName="Prague Metro")
         return render(request, "metro.html", context={
             'INFO': infos,
+            'tickets': verifiq,
         })
     return HttpResponse("""
         <div>
@@ -159,7 +161,7 @@ class EnterUserLoginView(LoginView):
 
     template_name = "authentication.html"
     form_class = AuthUserForm
-    success_url = reverse_lazy("block")
+    success_url = reverse_lazy("Greet")
     def get_success_url(self):
         return self.success_url
 

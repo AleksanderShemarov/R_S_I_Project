@@ -90,17 +90,26 @@ style="background: url(static/metrotire.jpg) no-repeat fixed 50% 50%; background
                 </li>-->
             </ul>
             <div style="display: flex;">
-                <div style="margin-right: 10px; margin-left: 3px;">
-                    <form class="d-flex" action="{% url 'RegI' %}" method="GET">
-                        <button class="btn btn-outline-primary" type="submit">Sign in</button>
-                    </form>
-                </div>
-                <div style="margin-left: 3px;">
-                    <form class="d-flex" action="{% url 'AUTH' %}" method="GET">
-                        <button class="btn btn-outline-secondary" type="submit">Sign on</button>
-                    </form>
-                </div>
+                {% if request.user.is_anonymous %}
+                    <div style="margin-right: 10px; margin-left: 3px;">
+                        <form class="d-flex" action="{% url 'RegI' %}" method="GET">
+                            <button class="btn btn-outline-primary" type="submit">Sign in</button>
+                        </form>
+                    </div>
+                    <div style="margin-left: 3px;">
+                        <form class="d-flex" action="{% url 'AUTH' %}" method="GET">
+                            <button class="btn btn-outline-secondary" type="submit">Sign on</button>
+                        </form>
+                    </div>
+                {% else %}
+                    <div style="margin-right: 10px; margin-left: 3px;">
+                        <form class="d-flex" action="{% url 'exit' %}" method="GET">
+                            <button class="btn btn-outline-danger" type="submit">Sign Out</button>
+                        </form>
+                    </div>
+                {% endif %}
             </div>
+            {{ request.user }}
         </div>
     </nav>
 
