@@ -1,0 +1,16 @@
+{% extends "reception_base.html" %}
+
+{% block title %}
+<title>Successful Reg In</title>
+{% endblock %}
+
+{% block content %}
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #30D5C8;">
+<!--    <div style="display: inline-block; border: 1px solid black; height: 100%; vertical-align: middle;">-->
+        <div style="text-align: center; border: 1px black solid; border-radius: 10px/14px; background-color: white;">
+            <h1 style="font-style: italic; background-color: black; color: gold; margin-bottom: 0; padding-bottom: 4px;
+border-radius: 10px 10px 0 0;">Registration was successfully done!</h1>
+            <p>Now you can <a href="{% url 'AUTH' %}">log in</a> or <a href="{% url 'Greet' %}">back</a> on the main page.</p>
+        </div>
+    </div>
+{% endblock %}

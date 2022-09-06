@@ -38,21 +38,78 @@ style="background: url(static/metrotire.jpg) no-repeat fixed 50% 50%; background
                     <li class="nav-item">
                         <a class="nav-link disabled">Home</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'DEV' %}">Team</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'pROJEcT' %}">Also_In_Production</a>
+                    </li>
+                {% elif request.resolver_match.url_name == "finding" %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'Greet' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="{% url 'DEV' %}">Team</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="{% url 'pROJEcT' %}">Also_In_Production</a>
+                    </li>
+                {% elif request.resolver_match.url_name == "DEV" %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'Greet' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="{% url 'DEV' %}">Team</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'pROJEcT' %}">Also_In_Production</a>
+                    </li>
+                {% elif request.resolver_match.url_name == "pROJEcT" %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'Greet' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'DEV' %}">Team</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="{% url 'pROJEcT' %}">Also_In_Production</a>
+                    </li>
                 {% else %}
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{% url 'Greet' %}">Home</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'DEV' %}">Team</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'pROJEcT' %}">Also_In_Production</a>
+                    </li>
                 {% endif %}
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Team</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Also_In_Production</a>
-                </li>
                 <!--<li class="nav-item">
                     <a class="nav-link disabled">Disabled</a>
                 </li>-->
             </ul>
+            <div style="display: flex;">
+                {% if request.user.is_anonymous %}
+                    <div style="margin-right: 10px; margin-left: 3px;">
+                        <form class="d-flex" action="{% url 'RegI' %}" method="GET">
+                            <button class="btn btn-outline-primary" type="submit">Sign in</button>
+                        </form>
+                    </div>
+                    <div style="margin-left: 3px;">
+                        <form class="d-flex" action="{% url 'AUTH' %}" method="GET">
+                            <button class="btn btn-outline-secondary" type="submit">Sign on</button>
+                        </form>
+                    </div>
+                {% else %}
+                    <div style="margin-right: 10px; margin-left: 3px;">
+                        <form class="d-flex" action="{% url 'exit' %}" method="GET">
+                            <button class="btn btn-outline-danger" type="submit">Sign Out</button>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+            {{ request.user }}
         </div>
     </nav>
 
