@@ -60,3 +60,43 @@ class MetroShortInfo(models.Model):
 #
 #         model = User
 #
+
+class Ticket(models.Model):
+
+    TYPES = [
+        ((D := "Daily"), 'Daily'),
+        ((H := "Hourly"), 'Hourly'),
+    ]
+    AGES = [
+        ((GU := "Grown-ups"), '18 - 60 years'),
+        ((STD := "Students"), '18 - 26 years'),
+        ((SNR := "Seniors"), '60 - 65 years'),
+        ((EldTEN := "ElderTeens"), '15 - 18 years'),
+    ]
+    VALUTES = [
+        ((KCZ := "czech krone"), 'Czech Koruna, KCZ'),
+    ]
+    category = models.CharField(
+        max_length=50,
+        choices=TYPES,
+        default=D
+    )
+    ages = models.CharField(
+        max_length=20,
+        null=True,
+        blank=True,
+        choices=AGES,
+        default=GU
+    )
+    name = models.CharField(max_length=50)
+    price = models.FloatField(default=0.00)
+    valute = models.TextField(
+        max_length=50,
+        choices=VALUTES,
+        default=KCZ
+    )
+    picture = models.ImageField(upload_to='logomeaning', null=True, blank=True)
+    info = models.TextField(null=True, blank=True, max_length=1000)
+
+    def __str__(self):
+        return f"{self.name}; {self.category}"

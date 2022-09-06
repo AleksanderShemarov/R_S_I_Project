@@ -93,15 +93,23 @@
     </div>
     <div>
         {% if "COMMON" in request.POST %}
-        <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;{{ i.commonInfo }}</p>
+            <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;{{ i.commonInfo }}</p>
         {% elif "HISTORY" in request.POST %}
-        <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;{{ i.history }}</p>
+            <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;{{ i.history }}</p>
         {% elif "HACK" in request.POST %}
-        <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;{{ i.hacks_facts }}</p>
+            <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;{{ i.hacks_facts }}</p>
         {% elif "TICKET" in request.POST %}
-        <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;{{ ... }}</p>
+            {% for ticket in tickets %}
+                <div class="container">
+                    <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;{{ ticket }}</p>
+                    <p style="text-align: justify;">{{ ticket.price }}</p>
+                    <div style="">
+                        <img src="..." alt="{{ ticket.name }}">
+                    </div>
+                </div>
+            {% endfor %}
         {% else %}
-        <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;{{ i.commonInfo }}</p>
+            <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;{{ i.commonInfo }}</p>
         {% endif %}
     </div>
 </div>
