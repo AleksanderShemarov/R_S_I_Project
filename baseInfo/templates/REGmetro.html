@@ -1,0 +1,230 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>Prague Metro System</title>
+<style>
+    .exchanges {
+        text-align: center;
+        margin-top: 30px;
+        display: flex;
+    }
+
+    table {
+        border: 1px solid orange;
+        margin: 0 auto;
+        width: 50vw;
+    }
+
+    th {
+        text-align: center;
+        padding-top: 20px;
+        padding-buttom: 25px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+{% for i in Inf %}
+<div class="" style="border: 1px solid orange; background-color: gold;">
+    <div style="margin-left: 0; text-align: center; position: relative; top: 15px;">
+        <img src="{{ i.symbol.url }}" alt="Emblem" width="300px" style="background: no-repeat;">
+    </div>
+    <div style="display: flex; background-color: #e3f2fd; padding-top: 10px;"><!--I will try later with 'float: left;'-->
+        <div style="margin-left: 0; padding: 0 0 0 0; margin: 0 0 0 0; flex-grow: 2;">
+            <img src="{% static 'img/Trasa_B.jpg' %}" alt="Trasa B" width="350px" height="200px" style="background: no-repeat;">
+        </div>
+        <div style="margin-left: 0; padding: 0 0 0 0; margin: 0 0 0 0; flex-grow: 2;">
+            <img src="{% static 'img/nusle_bridge.jpg' %}" alt="Nuselský most" width="350px" height="200px" style="background: no-repeat;">
+        </div>
+        <div style="margin-left: 0; padding: 0 0 0 0; margin: 0 0 0 0; flex-grow: 2;">
+            <img src="{% static 'img/variarity_metro.jpg' %}" alt="metrotrains" width="350px" height="200px" style="background: no-repeat;">
+        </div>
+        <div style="margin-left: 0; padding: 0 0 0 0; margin: 0 0 0 0; flex-grow: 0;">
+            <img src="{% static 'img/znáčka_stanici.jpg' %}" alt="Jířiho z Podebrad" width="350px" height="200px" style="background: no-repeat;">
+        </div>
+    </div>
+    <!--<div><img src="{ INFO.objects.filter(fieldname='emblem').values('emblem').url }" alt="Emblem"></div>--!!!-->
+    <!--Here will be the photo set: an emblem is in a round place; upper it - the beautiful panorama's photo-->
+</div>
+<div style="margin-top: 20px;">
+    <h1 style="text-align: center; vertical-align: center; font-size: 42pt;">{{ i.ofiname }}</h1>
+</div>
+<div class="container" style="margin-top: 50px;">
+    <div style="margin-top: 10px; margin-bottom: 9px; border: 1px solid orange;">
+        <form action="{% url 'metro' %}" method="POST">
+                    {% csrf_token %}
+        <ul class="nav nav-pills nav-fill">
+            {% if "COMMON" in request.POST %}
+            <li class="nav-item">
+                <input type="submit" value="A Little About History" name="HISTORY">
+            </li>
+            <li class="nav-item">
+                <input type="submit" value="Life Hacks & Facts" name="HACK">
+            </li>
+            <li class="nav-item">
+                <input type="submit" value="Tickets" name="TICKET">
+            </li>
+            {% elif "HISTORY" in request.POST %}
+            <li class="nav-item">
+                <input type="submit" value="Common Info" name="COMMON">
+            </li>
+            <li class="nav-item">
+                <input type="submit" value="Life Hacks & Facts" name="HACK">
+            </li>
+            <li class="nav-item">
+                <input type="submit" value="Tickets" name="TICKET">
+            </li>
+            {% elif "HACK" in request.POST %}
+            <li class="nav-item">
+                <input type="submit" value="Common Info" name="COMMON">
+            </li>
+            <li class="nav-item">
+                <input type="submit" value="A Little About History" name="HISTORY">
+            </li>
+            <li class="nav-item">
+                <input type="submit" value="Tickets" name="TICKET">
+            </li>
+            {% elif "TICKET" in request.POST %}
+            <li class="nav-item">
+                <input type="submit" value="Common Info" name="COMMON">
+            </li>
+            <li class="nav-item">
+                <input type="submit" value="A Little About History" name="HISTORY">
+            </li>
+            <li class="nav-item">
+                <input type="submit" value="Life Hacks & Facts" name="HACK">
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <input type="submit" value="A Little About History" name="HISTORY">
+            </li>
+            <li class="nav-item">
+                <input type="submit" value="Life Hacks & Facts" name="HACK">
+            </li>
+            <li class="nav-item">
+                <input type="submit" value="Tickets" name="TICKET">
+            </li>
+            {% endif %}
+        </ul>
+        </form>
+    </div>
+    <div>
+        {% if "COMMON" in request.POST %}
+            <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;{{ i.intro }}</p>
+            <div style="margin-left: 0;">
+                <img src="{% static 'metro_scheme.png' %}" alt="PragueScheme"
+                width="100%" style="background: no-repeat;">
+            </div>
+        {% elif "HISTORY" in request.POST %}
+            <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;{{ i.HistorY }}</p>
+        {% elif "HACK" in request.POST %}
+            <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;{{ i.facts }}</p>
+        {% elif "TICKET" in request.POST %}
+                <ul class="nav nav-pills justify-content-center" id="myTab" role="tablist" style="margin-top: 10px;">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+                                data-bs-target="#home-tab-pane" type="button" role="tab"
+                                aria-controls="home-tab-pane" aria-selected="true">
+                            Hourly Tickets
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
+                                data-bs-target="#contact-tab-pane" type="button" role="tab"
+                                aria-controls="contact-tab-pane" aria-selected="false">
+                            Daily Tickets
+                        </button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent" style="margin-top: 25px;">
+                    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel"
+                         aria-labelledby="home-tab" tabindex="0">
+                        <div class="row" style="padding-left: 30px;">
+                            {% for ticket in hour_tickets %}
+                            <div class="col">
+                                <div class="card" style="width: 18rem; height: auto; margin-bottom: 25px;">
+                                    <div class="container">
+                                        <p style="text-align: justify;
+text-align: center; margin-top: 10px; margin-bottom: -10px;">&nbsp;&nbsp;{{ ticket }}&nbsp;&nbsp;</p>
+                                        <p style="text-align: justify;
+text-align: center; margin-top: 10px; margin-bottom: -10px;">Price: {{ ticket.price }} {{ ticket.valute }}</p>
+                                        <p style="text-align: justify; border: 1px solid orange;
+text-align: justify; margin-top: 10px;">Information: </p>
+                                        <div>
+                                            <img src="{{ ticket.picture.url }}" alt="{{ ticket.name }}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel"
+                         aria-labelledby="contact-tab" tabindex="0">
+                        <div class="row" style="padding-left: 30px;">
+                            {% for ticket in day_tickets %}
+                            <div class="col">
+                                <div class="card" style="width: 18rem; height: auto; margin-bottom: 25px;">
+                                    <div class="container">
+                                        <p style="text-align: justify;
+text-align: center; margin-top: 10px; margin-bottom: -10px;">&nbsp;&nbsp;{{ ticket }}&nbsp;&nbsp;</p>
+                                        <p style="text-align: justify;
+text-align: center; margin-top: 10px; margin-bottom: -10px;">Price: {{ ticket.price }} {{ ticket.valute }}</p>
+                                        <p style="text-align: justify; border: 1px solid orange;
+text-align: justify; margin-top: 10px;">Information: </p>
+                                        <div>
+                                            <img src="{% static 'img/litačka.png' %}" alt="{{ ticket.name }}" width="260px" height="150px">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exchanges">
+                    <table>
+                        <tr>
+                            <th colspan="5" style="text-align: center; padding-bottom: 10px;
+                                font-size: 24pt;" bgcolor="#e3f2fd">Exchange Rates</tr>
+                        <tr>
+                            <th style="padding-top: 20px; padding-bottom: 25px;
+                                font: 18pt italic;">Flag</th>
+                            <th style="padding-top: 20px; padding-bottom: 25px;
+                                font: 18pt italic;">Country</th>
+                            <th style="padding-top: 20px; padding-bottom: 25px;
+                                font: 18pt italic;">Price</th>
+                            <th style="padding-top: 20px; padding-bottom: 25px;
+                                font: 18pt italic;">Symbol</th>
+                            <th style="padding-top: 20px; padding-bottom: 25px;
+                                font: 18pt italic;">Currency</th>
+                        </tr>
+                        {% for exch in exchange %}
+                        <tr>
+                            <td class="vlajka" style="padding-top: 20px; padding-bottom: 25px;">
+                                <img src="{{ exch.image.url }}" alt="{{ exch.country }}" width="100px">
+                            </td>
+                            <td class="stat" style="padding-top: 20px; padding-bottom: 25px;">{{ exch.country }}</td>
+                            <td class="cena" style="padding-top: 20px; padding-bottom: 25px;">{{ exch.price }}</td>
+                            {% if exch.symbol in json %}
+                                <td class="symbol" style="padding-top: 20px; padding-bottom: 25px;">{{ exch.symbol }}</td>
+                            {% endif %}
+                            <td class="mnena" style="padding-top: 20px; padding-bottom: 25px;">{{ exch.currency }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+
+        {% else %}
+            <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;{{ i.intro }}</p>
+            <div style="margin-left: 0;">
+                <img src="{% static 'img/metro_scheme.png' %}" alt="PragueScheme"
+                width="100%" style="background: no-repeat;">
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

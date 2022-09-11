@@ -1,13 +1,15 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.views.generic import ListView, TemplateView
 # FormView
-from .models import Greeting, MetroShortInfo, Ticket
+from .models import Greeting, MetroShortInfo, Ticket, MetroInfo, TableData
 from django.db.models import Q
 from .forms import UserFormReg, AuthUserForm
 from django.contrib.auth import logout
 # login, authenticate
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
+from baseInfo.exchange import exchange_func
+# from baseInfo.exchange import exchange
 from time import sleep
 # Create your views here.
 
@@ -49,19 +51,47 @@ class SearchList(ListView):
 
 
 def metro_view(request):
-    infos = MetroShortInfo.objects.filter(ofiName="Prague Metro")
-    verifiq = Ticket.objects.all()
-    if request.method == "GET":
-        # Table from models.py is going here!
-        return render(request, "metro.html", context={
-            'INFO' : infos,
-            'tickets': verifiq,
-        })
-    elif request.method == "POST":
-        return render(request, "metro.html", context={
-            'INFO': infos,
-            'tickets': verifiq,
-        })
+    if request.user.is_anonymous:
+        infos = MetroShortInfo.objects.filter(ofiName="Prague Metro")
+        verifiq = Ticket.objects.filter(category="Hourly")
+        if request.method == "GET":
+            # Table from models.py is going here!
+            return render(request, "metro.html", context={
+                'INFO' : infos,
+                'tickets': verifiq,
+            })
+        elif request.method == "POST":
+            return render(request, "metro.html", context={
+                'INFO': infos,
+                'tickets': verifiq,
+            })
+    else:
+        data = MetroInfo.objects.filter(ofiname="Prague Metro")
+        taxes_hour = MetroInfo.objects.get(ofiname="Prague Metro").tickets.filter(category="Hourly")
+        taxes_day = MetroInfo.objects.get(ofiname="Prague Metro").tickets.filter(category="Daily")
+        currency = TableData.objects.exclude(symbol="CZK")
+        func = exchange_func()
+        # func = exchange()
+        for i in currency:
+            if i.symbol in func:
+                i.price = func[i.symbol]
+        if request.method == "GET":
+            # Table from models.py is going here!
+            return render(request, "REGmetro.html", context={
+                'Inf': data,
+                'hour_tickets': taxes_hour,
+                'day_tickets': taxes_day,
+                'exchange': currency,
+                'json': func,
+            })
+        elif request.method == "POST":
+            return render(request, "REGmetro.html", context={
+                'Inf': data,
+                'hour_tickets': taxes_hour,
+                'day_tickets': taxes_day,
+                'exchange': currency,
+                'json': func,
+            })
     return HttpResponse("""
         <div>
             <p>It is under construction</p>
