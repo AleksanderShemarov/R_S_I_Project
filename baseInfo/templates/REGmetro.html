@@ -150,7 +150,7 @@ text-align: center; margin-top: 10px; margin-bottom: -10px;">&nbsp;&nbsp;{{ tick
                                         <p style="text-align: justify;
 text-align: center; margin-top: 10px; margin-bottom: -10px;">Price: {{ ticket.price }} {{ ticket.valute }}</p>
                                         <p style="text-align: justify; border: 1px solid orange;
-text-align: justify; margin-top: 10px;">Information: </p>
+text-align: justify; margin-top: 10px;">Information: <br>{{ ticket.info }}</p>
                                         <div>
                                             <img src="{{ ticket.picture.url }}" alt="{{ ticket.name }}">
                                         </div>
@@ -172,7 +172,7 @@ text-align: center; margin-top: 10px; margin-bottom: -10px;">&nbsp;&nbsp;{{ tick
                                         <p style="text-align: justify;
 text-align: center; margin-top: 10px; margin-bottom: -10px;">Price: {{ ticket.price }} {{ ticket.valute }}</p>
                                         <p style="text-align: justify; border: 1px solid orange;
-text-align: justify; margin-top: 10px;">Information: </p>
+text-align: justify; margin-top: 10px;">Information: <br>{{ ticket.info }}</p>
                                         <div>
                                             <img src="{% static 'img/litačka.png' %}" alt="{{ ticket.name }}" width="260px" height="150px">
                                         </div>
