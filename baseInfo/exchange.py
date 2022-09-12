@@ -7,7 +7,7 @@ def exchange_func():
             string = file.read()
 
         JSON = json.loads(string)
-        if datetime.date(datetime.today()) == JSON['date']:
+        if str(datetime.date(datetime.today())) == JSON['date'] or str(datetime.time(datetime.today()))[:2] in ('23', '00', '01', '02', '03'):
             JSON_valuts = JSON['rates']
             return JSON_valuts
         else:
