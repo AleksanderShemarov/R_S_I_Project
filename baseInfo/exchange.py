@@ -1,12 +1,13 @@
 import requests, json
 from datetime import datetime
 
+
 def exchange_func():
     try:
         with open('JSON_data.json', 'r', encoding="utf-8") as file:
             string = file.read()
 
-        JSON = json.loads(string)
+        JSON = eval(string)
         if str(datetime.date(datetime.today())) == JSON['date'] or str(datetime.time(datetime.today()))[:2] in ('23', '00', '01', '02', '03'):
             JSON_valuts = JSON['rates']
             return JSON_valuts
