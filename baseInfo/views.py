@@ -52,21 +52,27 @@ class SearchList(ListView):
 
 def metro_view(request):
     if request.user.is_anonymous:
+        lst = []
         infos = MetroShortInfo.objects.filter(ofiName="Prague Metro")
         verifiq = Ticket.objects.filter(category="Hourly")
+        for i in infos:
+            lst = i.hacks_facts.split('\r\n')
         if request.method == "GET":
             # Table from models.py is going here!
             return render(request, "metro.html", context={
                 'INFO' : infos,
                 'tickets': verifiq,
+                'facts': lst,
             })
         elif request.method == "POST":
             return render(request, "metro.html", context={
                 'INFO': infos,
                 'tickets': verifiq,
+                'facts': lst,
             })
     else:
         data = MetroInfo.objects.filter(ofiname="Prague Metro")
+        facts = MetroInfo.objects.get(ofiname="Prague Metro").facts.all()
         taxes_hour = MetroInfo.objects.get(ofiname="Prague Metro").tickets.filter(category="Hourly")
         taxes_day = MetroInfo.objects.get(ofiname="Prague Metro").tickets.filter(category="Daily")
         currency = TableData.objects.exclude(symbol="CZK")
@@ -83,6 +89,7 @@ def metro_view(request):
                 'day_tickets': taxes_day,
                 'exchange': currency,
                 'json': func,
+                'FACTS': facts,
             })
         elif request.method == "POST":
             return render(request, "REGmetro.html", context={
@@ -91,6 +98,7 @@ def metro_view(request):
                 'day_tickets': taxes_day,
                 'exchange': currency,
                 'json': func,
+                'FACTS': facts,
             })
     return HttpResponse("""
         <div>

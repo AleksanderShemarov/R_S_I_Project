@@ -119,7 +119,29 @@
         {% elif "HISTORY" in request.POST %}
             <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;{{ i.HistorY }}</p>
         {% elif "HACK" in request.POST %}
-            <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;{{ i.facts }}</p>
+            <div id="carouselInd" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {% for fact in FACTS %}
+                    {% with forloop.counter0 as i %}
+                    <div class="carousel-item {% if i is 0 %}active{% endif %}">
+                        <img src="{{ fact.image.url }}" class="d-block w-100" alt="{{ fact.name }}" style="height: 750px;">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h2 style="color: red;">{{ fact.name }}</h2>
+                            <p style="text-align: justify; font-size: 20pt; color: red;">{{ fact.text }}</p>
+                        </div>
+                    </div>
+                    {% endwith %}
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselInd" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselInd" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
         {% elif "TICKET" in request.POST %}
                 <ul class="nav nav-pills justify-content-center" id="myTab" role="tablist" style="margin-top: 10px;">
                     <li class="nav-item" role="presentation">

@@ -97,7 +97,9 @@
         {% elif "HISTORY" in request.POST %}
             <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;{{ i.history }}</p>
         {% elif "HACK" in request.POST %}
-            <p style="text-align: justify;">&nbsp;&nbsp;&nbsp;&nbsp;{{ i.hacks_facts }}</p>
+            {% for i in facts %}
+                <p style="text-align: justify; margin-bottom: -5px;">&nbsp;&nbsp;&nbsp;&nbsp;{{ i }}</p>
+            {% endfor %}
         {% elif "TICKET" in request.POST %}
             <div class="row" style="padding-left: 30px; margin-top: 25px;">
             {% for ticket in tickets %}

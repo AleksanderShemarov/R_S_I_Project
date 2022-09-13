@@ -74,7 +74,7 @@ class MetroInfo(models.Model):
     symbol = models.ImageField(upload_to='logomeaning/', null=True, blank=True)
     intro = models.TextField(max_length=1200)
     HistorY = models.TextField(max_length=2400)
-    facts = models.TextField(max_length=1200, null=True, blank=True)
+    # facts = models.TextField(max_length=1200, null=True, blank=True)
 
     def __str__(self):
         return f"{self.ofiname} (since {self.start}), {self.locat}"
@@ -136,3 +136,14 @@ class TableData(models.Model):
 
     def __str__(self):
         return f"{self.currency, self.symbol}"
+
+
+class FactsModel(models.Model):
+
+    name = models.CharField(max_length=75)
+    image = models.ImageField(upload_to="facts_table")
+    text = models.TextField(max_length=1000, null=True, blank=True)
+    metro = models.ForeignKey(MetroInfo, on_delete=models.SET_NULL, related_name='facts', null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.name}"
