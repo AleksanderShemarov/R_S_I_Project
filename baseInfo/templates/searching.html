@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
 {% block title %}
+{% load static %}
 <title>Searching data</title>
+<script src="{% static 'js/not_opened.js'%}"></script>
 {% endblock %}
 
 {% block content %}
@@ -15,7 +17,12 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ short.ofiName }}</h5>
                         <p class="card-text">{{ short.shortI }}</p>
-                        <a href="{% url 'metro' %}" class="btn btn-primary">More</a> <!--!!!!!-->
+                        {% if short.opened %}
+                            <a href="{% url 'metro' %}" class="btn btn-primary">More</a> <!--!!!!!-->
+                        {% else %}
+<!--                            <a href="..." class="btn btn-primary" onclick="notOpened()">More</a>-->
+                            <button class="btn btn-primary" onclick="notOpened()">More</button>
+                        {% endif %}
                     </div>
                 </div>
             </div>
