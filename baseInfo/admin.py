@@ -12,7 +12,7 @@ class GreetingAdmin(admin.ModelAdmin):
 
 class MetroShortInfoAdmin(admin.ModelAdmin):
 
-    list_display = ("ofiName", "city", "openDate", "emblem")
+    list_display = ("ofiName", "city", "openDate", "emblem", "opened")
     search_fields = ["ofiName", "city"]
 
 

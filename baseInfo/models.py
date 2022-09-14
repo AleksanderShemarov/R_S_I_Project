@@ -28,17 +28,19 @@ class MetroShortInfo(models.Model):
     #     return datetime.strftime(datetime(year, month, day), '%d-%m-%Y')
 
     ofiName = models.CharField(max_length=100)
-    n_ofiName = models.CharField(max_length=150, default="")
-    city = models.TextField(max_length=30, default="")
-    server = models.TextField(max_length=150, default="")
+    n_ofiName = models.CharField(max_length=150, null=True, blank=True)
+    city = models.TextField(max_length=30)
+    server = models.TextField(max_length=150)
     # openDate = models.DateField(trueDate(), default="29.02.2020")
-    openDate = models.DateField()
-    workTime = models.TextField(max_length=120)
+    openDate = models.DateField(help_text="Example: YYYY-MM-DD")
+    workTime = models.TextField(max_length=120, null=True, blank=True)
     emblem = models.ImageField(upload_to='logomeaning/', null=True, blank=True)
-    commonInfo = models.TextField(max_length=1200)
-    history = models.TextField(max_length=1200, default="")
-    hacks_facts = models.TextField(max_length=1200, default="")
+    commonInfo = models.TextField(max_length=1200, null=True, blank=True)
+    history = models.TextField(max_length=1200, null=True, blank=True)
+    hacks_facts = models.TextField(max_length=1200, null=True, blank=True)
     shortI = models.TextField(max_length=125)
+
+    opened = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.ofiName}"
