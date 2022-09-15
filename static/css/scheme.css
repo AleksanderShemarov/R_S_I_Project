@@ -1,0 +1,43 @@
+#html-frame {
+    display: grid;
+    grid-gap: 14.5px;
+    grid-template-rows: 300px;
+    grid-template-areas: "first third fourth" "second third fifth";
+    background: linear-gradient(red 50%, gold 50%);
+}
+
+#first,
+#second,
+#third,
+#fourth,
+#fifth {
+    display: inline-block;
+    padding: 0 0 0 0;
+    margin: 10px;
+    vertical-align: center;
+}
+
+#first {
+    grid-area: first;
+}
+
+#second {
+    grid-area: second;
+}
+
+#third {
+    grid-area: third;
+}
+
+#fourth {
+    grid-area: fourth;
+}
+
+#fifth {
+    grid-area: fifth;
+}
+
+img .scheme:hover {
+    width: 100%;
+    height: auto;
+}

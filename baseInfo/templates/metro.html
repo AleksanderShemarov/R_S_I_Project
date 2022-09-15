@@ -1,31 +1,52 @@
 {% extends "base.html" %}
 
 {% block title %}
+{% load static %}
 <title>Prague Metro System</title>
+<link rel="stylesheet" href="{% static 'css/scheme.css' %}">
+<script src="{% static 'js/picture_sizing.js' %}"></script>
 {% endblock %}
 
 {% block content %}
-{% load static %}
+<!--{% load static %}-->
 {% for i in INFO %}
 <div class="" style="border: 1px solid orange;">
-    <div style="margin-left: 0;">
-        <img src="{% static 'img/metro_scheme.png' %}" alt="PragueScheme"
-             width="100%" style="background: no-repeat;">
-    </div>
-    <div style="display: flex; background-color: #e3f2fd; padding-top: 10px;"><!--I will try later with 'float: left;'-->
-        <div style="margin-left: 0; padding: 0 0 0 0; margin: 0 0 0 0; flex-grow: 2;">
+    <div id="html-frame"><!--I will try later with 'float: left;'-->
+        <div id="first">
             <img src="{% static 'img/Trasa_B.jpg' %}" alt="Trasa B" width="350px" height="200px" style="background: no-repeat;">
         </div>
-        <div style="margin-left: 0; padding: 0 0 0 0; margin: 0 0 0 0; flex-grow: 2;">
+        <div id="second">
             <img src="{% static 'img/nusle_bridge.jpg' %}" alt="Nuselský most" width="350px" height="200px" style="background: no-repeat;">
         </div>
-        <div style="margin-left: 0; padding: 0 0 0 0; margin: 0 0 0 0; flex-grow: 2;">
+        <div id="third">
+            <img class="scheme" src="{% static 'img/metro_scheme.png' %}" alt="PragueScheme"
+             width="100%" style="background: no-repeat; margin-left: auto; margin-right: auto;">
+        </div>
+        <div id="fourth">
             <img src="{% static 'img/variarity_metro.jpg' %}" alt="metrotrains" width="350px" height="200px" style="background: no-repeat;">
         </div>
-        <div style="margin-left: 0; padding: 0 0 0 0; margin: 0 0 0 0; flex-grow: 0;">
+        <div id="fifth">
             <img src="{% static 'img/znáčka_stanici.jpg' %}" alt="Jířiho z Podebrad" width="350px" height="200px" style="background: no-repeat;">
         </div>
     </div>
+<!--    <div style="margin-left: 0; text-align: center;">-->
+<!--        <img class="scheme" src="{% static 'img/metro_scheme.png' %}" alt="PragueScheme"-->
+<!--             width="45%" height="37%" style="background: no-repeat; margin-left: auto; margin-right: auto;">-->
+<!--    </div>-->
+<!--    <div style="display: flex; background-color: #e3f2fd; padding-top: 10px;">&lt;!&ndash;I will try later with 'float: left;'&ndash;&gt;-->
+<!--        <div style="margin-left: 0; padding: 0 0 0 0; margin: 0 0 0 0; flex-grow: 2;">-->
+<!--            <img src="{% static 'img/Trasa_B.jpg' %}" alt="Trasa B" width="350px" height="200px" style="background: no-repeat;">-->
+<!--        </div>-->
+<!--        <div style="margin-left: 0; padding: 0 0 0 0; margin: 0 0 0 0; flex-grow: 2;">-->
+<!--            <img src="{% static 'img/nusle_bridge.jpg' %}" alt="Nuselský most" width="350px" height="200px" style="background: no-repeat;">-->
+<!--        </div>-->
+<!--        <div style="margin-left: 0; padding: 0 0 0 0; margin: 0 0 0 0; flex-grow: 2;">-->
+<!--            <img src="{% static 'img/variarity_metro.jpg' %}" alt="metrotrains" width="350px" height="200px" style="background: no-repeat;">-->
+<!--        </div>-->
+<!--        <div style="margin-left: 0; padding: 0 0 0 0; margin: 0 0 0 0; flex-grow: 0;">-->
+<!--            <img src="{% static 'img/znáčka_stanici.jpg' %}" alt="Jířiho z Podebrad" width="350px" height="200px" style="background: no-repeat;">-->
+<!--        </div>-->
+<!--    </div>-->
     <div style="margin-left: 0; text-align: center; position: absolute; top: 75px; left: 600px;">
         <img src="{{ i.emblem.url }}" alt="Emblem" width="300px" style="background: no-repeat;">
     </div>
