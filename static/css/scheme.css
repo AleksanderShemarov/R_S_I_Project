@@ -3,7 +3,7 @@
     grid-gap: 14.5px;
     grid-template-rows: 300px;
     grid-template-areas: "first third fourth" "second third fifth";
-    background: linear-gradient(red 50%, gold 50%);
+    background: linear-gradient(gold 50%, red 50%);
 }
 
 #first,

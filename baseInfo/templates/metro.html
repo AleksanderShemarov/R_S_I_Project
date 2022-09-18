@@ -4,7 +4,6 @@
 {% load static %}
 <title>Prague Metro System</title>
 <link rel="stylesheet" href="{% static 'css/scheme.css' %}">
-<script src="{% static 'js/picture_sizing.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -18,9 +17,10 @@
         <div id="second">
             <img src="{% static 'img/nusle_bridge.jpg' %}" alt="Nuselský most" width="350px" height="200px" style="background: no-repeat;">
         </div>
-        <div id="third">
+        <div id="third" class="container" style="margin-left: 0;">
             <img class="scheme" src="{% static 'img/metro_scheme.png' %}" alt="PragueScheme"
-             width="100%" style="background: no-repeat; margin-left: auto; margin-right: auto;">
+             width="100%" style="background: no-repeat; margin-left: auto; margin-right: auto; position: relative;" id="schem"
+                 onclick="imageGrowing()">
         </div>
         <div id="fourth">
             <img src="{% static 'img/variarity_metro.jpg' %}" alt="metrotrains" width="350px" height="200px" style="background: no-repeat;">
@@ -29,6 +29,23 @@
             <img src="{% static 'img/znáčka_stanici.jpg' %}" alt="Jířiho z Podebrad" width="350px" height="200px" style="background: no-repeat;">
         </div>
     </div>
+    <script>
+        var image = document.getElementById("schem");
+
+        function imageGrowing() {
+            image.style.top = "140px";
+            image.style.transform = "scale(1.5)";
+            image.style.transition = "transform 0.75s ease";
+            document.getElementById("schem").setAttribute('onclick', 'imageClosing()')
+        };
+
+        function imageClosing() {
+            image.style.top = "0px";
+            image.style.transform = "scale(1)";
+            image.style.transition = "transform 0.75s ease";
+            document.getElementById("schem").setAttribute('onclick', 'imageGrowing()')
+        };
+    </script><!--why does document.getElementById (or window.getElementById) not working through a script's link in the head tags???-->
 <!--    <div style="margin-left: 0; text-align: center;">-->
 <!--        <img class="scheme" src="{% static 'img/metro_scheme.png' %}" alt="PragueScheme"-->
 <!--             width="45%" height="37%" style="background: no-repeat; margin-left: auto; margin-right: auto;">-->
